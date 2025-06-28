@@ -69,3 +69,21 @@ taskList.addEventListener("change", (e) => {
     displayTasks();
   }
 });
+
+const filterButtons = document.querySelectorAll("[data-filter]");
+
+filterButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    filterButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const filter = btn.dataset.filter;
+    if (filter === "all") return displayTasks();
+    const filtered = tasks.filter(
+      (t) => t.status.toLowerCase().replace(" ", "-") === filter
+    );
+    displayTasks(filtered);
+  });
+});
+
+checkOverdue();
+displayTasks();
