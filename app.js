@@ -15,6 +15,16 @@ function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+function checkOverdue() {
+  const today = new Date().toISOString().split("T")[0];
+  tasks = tasks.map((t) =>
+    t.status !== "Completed" && t.deadline < today
+      ? { ...t, status: "Overdue" }
+      : t
+  );
+  saveTasks();
+}
+
 function displayTasks(list = tasks) {
   taskList.innerHTML = "";
   list.forEach((task) => {
@@ -41,6 +51,7 @@ addTaskBtn.addEventListener("click", () => {
   const deadline = deadlineInput.value;
   if (!name || !category || !deadline) return;
   tasks.push(createTask(name, category, deadline, statusInput.value));
+  checkOverdue();
   saveTasks();
   displayTasks();
   taskInput.value = "";
@@ -48,11 +59,12 @@ addTaskBtn.addEventListener("click", () => {
   deadlineInput.value = "";
 });
 
-taskList.addEventListener("change", e => {
+taskList.addEventListener("change", (e) => {
   if (e.target.tagName === "SELECT") {
     const id = +e.target.dataset.id;
     const status = e.target.value;
-    tasks = tasks.map(t => t.id === id ? { ...t, status } : t);
+    tasks = tasks.map((t) => (t.id === id ? { ...t, status } : t));
+    checkOverdue();
     saveTasks();
     displayTasks();
   }
