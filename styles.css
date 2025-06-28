@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background:rgb(75, 73, 73);
+  background: rgb(75, 73, 73);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ body {
   width: 300px;
   text-align: center;
   border-radius: 5px;
-  border: 2px solid rgb(21, 2, 2);;
+  border: 2px solid rgb(21, 2, 2);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -25,7 +25,9 @@ body {
   margin-bottom: 15px;
 }
 
-.task-form input, .task-form select, .task-form button {
+.task-form input,
+.task-form select,
+.task-form button {
   padding: 8px;
   background-color: rgba(253, 253, 252, 0.97);
   color: black;
@@ -37,15 +39,29 @@ body {
   margin-bottom: 15px;
 }
 
-/* revisit to color code task list items based on status. Completed grayed out, in progress green, overdue red.*/
+
 #task-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  border: 1px solid rgba(243, 243, 235, 0.97);;
+  border: 1px solid rgba(243, 243, 235, 0.97);
   margin-bottom: 5px;
+  color:white;
 }
+
+#task-list li.green {
+  background-color:green;
+}
+
+#task-list li.gray {
+  background-color: gray;
+}
+
+#task-list li.red {
+  background-color: red;
+}
+
 
 .filters {
   display: flex;
@@ -61,5 +77,18 @@ body {
 }
 
 .filters button.active {
-  background: #ddd;
+  color: white;
+  background:green;
+}
+
+.filters button.green {
+  background: green;
+}
+
+.filters button.red {
+  background: red;
+}
+
+.filters button.gray {
+  background: gray;
 }

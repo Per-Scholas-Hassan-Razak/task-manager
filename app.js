@@ -41,6 +41,11 @@ function displayTasks(list = tasks) {
         <option ${task.status === "Overdue" ? "selected" : ""}>Overdue</option>
       </select>
     `;
+
+    if (task.status === "In Progress") li.classList.add("green");
+    if (task.status === "Completed") li.classList.add("gray");
+    if (task.status === "Overdue") li.classList.add("red");
+
     taskList.appendChild(li);
   });
 }
@@ -74,10 +79,18 @@ const filterButtons = document.querySelectorAll("[data-filter]");
 
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    filterButtons.forEach((b) => b.classList.remove("active"));
+    filterButtons.forEach((b) =>
+      b.classList.remove("active", "green", "red", "gray")
+    );
     btn.classList.add("active");
     const filter = btn.dataset.filter;
+
+    if (filter === "in-progress") btn.classList.add("green");
+    if (filter === "completed") btn.classList.add("gray");
+    if (filter === "overdue") btn.classList.add("red");
+
     if (filter === "all") return displayTasks();
+
     const filtered = tasks.filter(
       (t) => t.status.toLowerCase().replace(" ", "-") === filter
     );
