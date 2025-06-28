@@ -14,3 +14,20 @@ function createTask(name, category, deadline, status = "In Progress") {
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
+
+
+function displayTasks(list = tasks) {
+  taskList.innerHTML = "";
+  list.forEach(task => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span>${task.name}</span>
+      <select data-id="${task.id}">
+        <option ${task.status === "In Progress" ? "selected" : ""}>In Progress</option>
+        <option ${task.status === "Completed" ? "selected" : ""}>Completed</option>
+        <option ${task.status === "Overdue" ? "selected" : ""}>Overdue</option>
+      </select>
+    `;
+    taskList.appendChild(li);
+  });
+}
