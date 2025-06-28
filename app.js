@@ -47,3 +47,13 @@ addTaskBtn.addEventListener("click", () => {
   categoryInput.value = "";
   deadlineInput.value = "";
 });
+
+taskList.addEventListener("change", e => {
+  if (e.target.tagName === "SELECT") {
+    const id = +e.target.dataset.id;
+    const status = e.target.value;
+    tasks = tasks.map(t => t.id === id ? { ...t, status } : t);
+    saveTasks();
+    displayTasks();
+  }
+});
